@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mortage calculator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <select name="bankList" id="bankList" onchange="model.changeBank(this.value)"></select>
+    <a href="banklist.html">Home</a>
+    <h1 id="bankName"> Bank</h1> 
+    <h2>Bank offer:</h2>
+    <h2 id="isRequest"></h2> 
+    <div id ="bankTerms">Умови банку</div>
+    <label for="loan">Initial loan:</label><br>
+    <input id="loan" title="Loan sum" type="number"  name="Loan" value="0"><br>
+    <input id="range" type="range"></form> 
+    <h2>Mortgage:</h2>
+    <p id="estimatedData"> Розрахункові данні </p>
+    <form id="formPayment" action="request.html" onsubmit="model.sendRequest()">   
+       <input id="buttonRequest" type="submit" value = "Request">
+    </form>
+      <script src="mortage.js"></script>
+  </body>
+</html>
+

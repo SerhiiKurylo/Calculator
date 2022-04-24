@@ -1,0 +1,71 @@
+
+body {
+    background-color: rgb(199, 217, 252);
+    width: 960px;
+    margin: 0px auto;
+    }
+    
+    table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        
+    }
+
+    th{
+        padding: 5px;
+        border: 1px solid black;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    td{
+        padding: 2px;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    .th-radio{
+        
+        padding:2px;
+        width: 5%;
+        color: rgb(1, 78, 1);
+    }
+
+    html {
+        font-family: 'helvetica neue', helvetica, arial, sans-serif;
+      }
+      
+      .form-input{
+        padding: 5px;
+      }
+
+      .newBank, .newBanklabel{
+        padding: 5px;
+        margin: 5px;
+        clear:both; 
+        text-align:center;
+      }
+
+     .newBankButton{
+      padding: 2px;
+      margin: 5px;
+     }
+
+     #isRequest, .td-green{
+      color: rgb(1, 78, 1);
+     }
+      /* 
+    label {
+        float:left;
+    }
+     */
+    
+    
+    
+    
+    
+    
+    
+    
+    
