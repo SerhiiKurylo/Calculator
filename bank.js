@@ -140,6 +140,9 @@ let view = {
         newElement.id     = formElements[i].id;
         newElement.type   = formElements[i].type;
         newElement.name   = formElements[i].id;
+        if(formElements[i].type = "number"){
+          newElement.setAttribute("min", 0);
+        }
         newElement.setAttribute("class", "newBank");
         newElement.required = true;
         view.createForm.appendChild(newElement);

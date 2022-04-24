@@ -58,7 +58,12 @@ let model = {
         this.loan = elementLoan.value;
        
         let calcLoan = function(){
-            if(elementLoan.value > model.bank.maxLoan){
+
+            if (elementLoan.value < 0){
+                elementLoan.value = 0;
+            }
+            
+            if(Number(elementLoan.value) > Number(model.bank.maxLoan)){
                 elementLoan.value = model.bank.maxLoan;
             }
             model.loan = elementLoan.value;
