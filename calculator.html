@@ -6,21 +6,26 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <select name="bankList" id="bankList" onchange="model.changeBank(this.value)"></select>
+    <select name="bankList" id="bankList"></select>
     <a href="banklist.html">Home</a>
     <h1 id="bankName"> Bank</h1> 
     <h2>Bank offer:</h2>
     <h2 id="isRequest"></h2> 
-    <div id ="bankTerms">Умови банку</div>
+    <p id="maxLoan">Maximum loan:</p>
+    <p id="interestRate">Interest rate:</p>
+    <p id="loanTerm">Loan term:</p>
     <label for="loan">Initial loan:</label><br>
     <input id="loan" title="Loan sum" type="number" min = "0" name="Loan" value="0"><br>
     <input id="range" type="range"></form> 
     <h2>Mortgage:</h2>
-    <p id="estimatedData"> Розрахункові данні </p>
+    <p id="initialLoan">Initial loan:</p>
+    <p id="downPayment">Down payment:</p>
+    <p id="payPerMonth">Pay per month:</p>
     <form id="formPayment" action="request.html" onsubmit="model.sendRequest()">   
        <input id="buttonRequest" type="submit" value = "Request">
     </form>
-      <script src="mortage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>  
+    <script src="mortage.js"></script>
   </body>
 </html>
 

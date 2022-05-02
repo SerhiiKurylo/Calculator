@@ -10,78 +10,71 @@ let model = {
         //Встановлюємо список банків
         this.setBanksList();
 
-        let selectList = document.getElementById("bankList");
-
-        while (selectList.firstChild) {
-            selectList.removeChild(selectList.firstChild);
-          }
-
-
         for(let i=0; i<this.banksList.length; i++){
-            let elementOptions = document.createElement("option");
-            elementOptions.value = this.banksList[i].id;
-            elementOptions.innerHTML = this.banksList[i].name;
-            elementOptions.selected = (this.banksList[i].id === this.bank.id);
-            selectList.appendChild(elementOptions);
+            console.log(this.banksList[i].id);
+        $("#bankList").append(`<option value=${this.banksList[i].id}>${this.banksList[i].name}</option>`); 
+            if(this.banksList[i].id === this.bank.id){
+                $("#bankList :last").prop("selected", "selected");     
+            } 
+    
         }
         
         //Заповнюємо данні банку
-           document.getElementById("bankName").innerHTML = this.bank.bankName;     
-           document.getElementById("bankTerms").innerHTML = `<p>Maximum loan: ${this.bank.maxLoan} $</p>`+
-                                                             `<p>Interest rate: ${this.bank.rate} %</p>` +
-                                                             `<p>Loan term: ${this.bank.termLoan} month</p>`; 
-            
+        $("#bankName").text(this.bank.bankName);     
+        $("#maxLoan").text(`Maximum loan: ${this.bank.maxLoan} $`);
+        $("#interestRate").text(`Interest rate: ${this.bank.rate} %`);
+        $("#loanTerm").text(`Loan term: ${this.bank.termLoan} month`);   
         
         //Заповнюємо данні і назначаємо обробники
-        let elementLoan = document.getElementById("loan");
-        let elementRange = document.getElementById("range"); 
-        let requestMessage = document.getElementById("isRequest");
-        let requestButton = document.getElementById("buttonRequest");
+        let elementLoan = $("#loan");
+        let elementRange = $("#range"); 
+        let requestMessage = $("#isRequest");
+        let requestButton = $("#buttonRequest");
 
         if(this.bank.isRequest){
-            requestMessage.innerHTML = "Your request is being processed by the bank";
-            elementLoan.setAttribute("disabled", "disabled");
-            elementRange.setAttribute("disabled", "disabled");
-            requestButton.setAttribute("disabled", "disabled");    
+            requestMessage.text("Your request is being processed by the bank");
+            elementLoan.attr("disabled", "disabled");
+            elementRange.attr("disabled", "disabled");
+            requestButton.attr("disabled", "disabled");    
        } else {
-            requestMessage.innerHTML = "";
-            elementLoan.removeAttribute("disabled");
-            elementRange.removeAttribute("disabled");
-            requestButton.removeAttribute("disabled");  
+        requestMessage.text("");
+            elementLoan.attr("disabled", null);
+            elementRange.attr("disabled", null);
+            requestButton.attr("disabled", null);  
        }
 
         
-        
+       let val = ((this.bank.loan == 0) ? this.bank.maxLoan : this.bank.loan);
 
-        elementLoan.value = ((this.bank.loan == 0) ? this.bank.maxLoan : this.bank.loan);
-        elementLoan.setAttribute("max", this.bank.maxLoan); 
-        this.loan = elementLoan.value;
+        console.log("!" + val)          
+        elementLoan.val(val); 
+        elementLoan.attr("max", this.bank.maxLoan); 
+        this.loan = val;
        
         let calcLoan = function(){
 
-            if (elementLoan.value < 0){
-                elementLoan.value = 0;
+            if (elementLoan.val() < 0){
+                elementLoan.val(0);
             }
             
-            if(Number(elementLoan.value) > Number(model.bank.maxLoan)){
-                elementLoan.value = model.bank.maxLoan;
+            if(Number(elementLoan.val()) > Number(model.bank.maxLoan)){
+                elementLoan.val(model.bank.maxLoan);
             }
-            model.loan = elementLoan.value;
-            elementRange.value = model.loan; 
+            model.loan = elementLoan.val();
+            elementRange.val(model.loan); 
             model.calcMinPayment();
         };
 
-        elementLoan.onchange = calcLoan;
-        elementLoan.onclick  = calcLoan;
+        elementLoan.on({"change":calcLoan, "click":calcLoan});
      
-        elementRange.setAttribute("max", this.bank.maxLoan);
-        elementRange.setAttribute("step", 1000);
-        elementRange.setAttribute("value", elementLoan.value);
-        elementRange.onchange = function(){
-            elementLoan.value = elementRange.value
-            model.loan = elementLoan.value;
+        elementRange.attr("max", this.bank.maxLoan);
+        elementRange.attr("step", 1000);
+        elementRange.attr("value", elementLoan.value);
+        elementRange.on("change", function(){
+        elementLoan.val(elementRange.val());
+            model.loan = elementLoan.val();
             model.calcMinPayment();
-        };
+        });
         
         model.calcMinPayment();
 
@@ -97,6 +90,7 @@ let model = {
                 this.banksList.push(bankElements);          
             }  
         }
+        $('option', $("#bankList")).remove();
     },  
     
     setBank: function(bankId){
@@ -119,10 +113,9 @@ let model = {
             calcFun(this.bank.loan);
         }   
         
-        let textEstimatedData = `<p>Initial loan: ${this.loan} $</p>`+
-                                `<p>Down payment: ${this.minPayment} $</p>`+
-                                `<p>Pay per month: ${this.monthPay} $</p>`      
-        document.getElementById("estimatedData").innerHTML =  textEstimatedData;
+        $("#initialLoan").text(`Initial loan: ${this.loan} $`);
+        $("#downPayment").text(`Down payment: ${this.minPayment} $`);
+        $("#payPerMonth").text(`Pay per month: ${this.monthPay} $`);      
         
     },
     //Відправка запиту
@@ -135,22 +128,33 @@ let model = {
 
     changeBank:function(value){
             
-        for(let i=0; i<model.banksList.length;i++){
-             
-            if(value == model.banksList[i].id){    
-                model.setBank(model.banksList[i].idName);
-                break;
-            }
-        }
+       
 
+    },
+
+    initHandle:function(){
+        $("#bankList").on("change", function(){
+            
+            let value =  $("#bankList :selected").val();
+
+            for(let i=0; i<model.banksList.length;i++){
+             
+                if(value == model.banksList[i].id){    
+                    model.setBank(model.banksList[i].idName);
+                    break;
+                }
+            }
+        })
     }
+
+
 }
 
 
 // Ініціалізація сторінки
 function init(){
 
-    
+    model.initHandle();
     let bankId = window.location.search.match(/\w+\d+/);
     if(bankId){
         bankId = bankId[0];
