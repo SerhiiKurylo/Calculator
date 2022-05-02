@@ -36,8 +36,13 @@ body {
         font-family: 'helvetica neue', helvetica, arial, sans-serif;
       }
       
-      .form-input{
+      .form-input, .inputNewBank{
         padding: 5px;
+        margin: 5px;
+      }
+
+      .inputNewBank{
+        display: none;
       }
 
       .newBank, .newBanklabel{

@@ -8,15 +8,26 @@
   <body>
       <h1> List of banks</h1>
       <div class="bankList">
-        <div class="form-input">
-          <input id="create" title="Create" type="button" value="Create" onclick="view.createRow()"> 
-          <input id="edit"  title="Edit" type="button" value="Edit" onclick="view.editRow()">
-          <input id="remove"  title="Remove" type="button" value="Remove" onclick="view.deleteRow()">
-        </div>
-        <form  id="form" class="form-input"></form>
+        <form class="form-input">
+          <input id="create" title="Create" type="button" value="Create"> 
+          <input id="edit"  title="Edit" type="button" value="Edit">
+          <input id="remove"  title="Remove" type="button" value="Remove"><br>
+          <div class="inputNewBank"> 
+            <label class = "newBankLabel">Bank:</label><br>
+            <input type="text" id="bankName" class = "newBank"></input><br>
+            <label class = "newBankLabel">Rate:</label><br>
+            <input type="number" id="rate" class = "newBank" min="0"></input><br>
+            <label class = "newBankLabel">Maximum loan:</label><br>
+            <input type="number" id="maxLoan" class = "newBank" min="0"></input><br>
+            <label class = "newBankLabel">Loan term:</label><br>
+            <input type="number" id="termLoan" class = "newBank" min="0"></input><br>
+            <input type="button" class="newBankButton" value="Save" id="saveButton"></input>
+            <input type="button" class="newBankButton" value="Cancel" id="cancleButton"></input>
+          </div>
+        </form>
         <table id="bankTable">
           <tr>
-            <th class="th-radio">&#10003</th>
+            <th class="th-radio">✔️</th>
             <th>Bank name</th>
             <th>Interest rate</th>
             <th>Maximum loan</th>
@@ -26,6 +37,7 @@
           </tr>
         </table>
       </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
       <script src="bank.js"></script>
   </body>
 </html>
