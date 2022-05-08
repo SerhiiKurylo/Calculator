@@ -35,9 +35,24 @@
             <th>Loan term</th>
             <th>Requested</th>
           </tr>
+          <template id="table-row">
+            <tr id={{nameId}}>
+            <td><input type='radio' name='banksList' value={{nameId}}></input> </td>
+            <td>{{bankName}}</td>
+            <td>{{rate}}</td>
+            <td>{{maxLoan}}</td>
+            <td>{{minPayment}}</td>
+            <td>{{termLoan}}</td>
+            <td id="td-requsted">{{requested}}</td>
+            <td class="td-green"><form action="calculator.html"><input type="submit" name={{nameId}} value="Calculate" ></input></form></td>
+            </tr>    
+          </template>
         </table>
       </div>
       <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+      <script src="mustache.min.js"></script>
       <script src="bank.js"></script>
+      <script src="bankList.js"></script>
+      <script src="main.js"></script>
   </body>
 </html>
