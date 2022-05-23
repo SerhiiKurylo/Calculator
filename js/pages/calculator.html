@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mortage calculator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <select name="bankList" id="bankList"></select>
+    <a href="banklist.html">Home</a>
+    <div id="template"></div>
+    <template id="mortage">
+      <h1 id="bankName"> {{bankName}}</h1>
+      <h2>Bank offer:</h2>
+      <h2 id="isRequest">{{requestMessage}}</h2>
+      <p id="maxLoan"> Maximum loan: {{maxLoan}} $</p>
+      <p id="interestRate" data-value={{rate}}>Interest rate: {{rate}} %</p>
+      <p id="loanTerm" data-value={{termLoan}}>Loan term: {{termLoan}} month</p>
+      <label for="loan">Initial loan:</label><br>
+      <input id="loan" title="Loan sum" type="number" min="0" name="Loan" value={{loan}}><br>
+      <input id="range" type="range" step="1000" max={{maxLoan}} value={{loan}}></form>
+      <h2>Mortgage:</h2>
+      <p id="initialLoan">Initial loan: {{loan}} $</p>
+      <p id="downPayment">Down payment: {{downPayment}} $</p>
+      <p id="payPerMonth">Pay per month: {{payPerMonth}} $</p>
+    </template>
+    <form id="formPayment" action="request.html">   
+       <input id="buttonRequest" type="submit" value = "Request">
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> 
+    <script src="mustache.min.js"></script>
+    <script src="mortage.js"></script>
+  </body>
+</html>
